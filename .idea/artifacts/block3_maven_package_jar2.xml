@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="block3-maven-package:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/block3_maven_package_jar2</output-path>
+    <root id="archive" name="block3-maven-package.jar">
+      <element id="module-output" name="block3-maven-package" />
+    </root>
+  </artifact>
+</component>
