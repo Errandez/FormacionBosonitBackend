@@ -15,6 +15,19 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static void main(String[] args) throws IOException, InvalidLineFormatException, Exception{
+        try {
+            Persons persons = lectura();
+            listar(persons);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }catch(InvalidLineFormatException ex) {
+            ex.printStackTrace();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Persons lectura() throws IOException, InvalidLineFormatException, Exception{
         boolean b = false;
         try {
@@ -146,16 +159,5 @@ public class Main {
 
     }
 
-    public static void main(String[] args) throws IOException, InvalidLineFormatException, Exception{
-        try {
-            Persons persons = lectura();
-            listar(persons);
-        }catch(IOException e) {
-            e.printStackTrace();
-        }catch(InvalidLineFormatException ex) {
-            ex.printStackTrace();
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 }
