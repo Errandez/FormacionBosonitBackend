@@ -7,7 +7,15 @@
         <option value="$PROJECT_DIR$/block1-process-file-and-streams/pom.xml" />
         <option value="$PROJECT_DIR$/block3-maven-package/pom.xml" />
         <option value="$PROJECT_DIR$/block3-create-repo-git/pom.xml" />
+        <option value="$USER_HOME$/Desktop/Erick/Ejercicios_Java/Bloque_5/block5-command-line-runner/Block5-command-line-runner/pom.xml" />
+        <option value="$PROJECT_DIR$/Bloque5-command-line-runner/pom.xml" />
+        <option value="$PROJECT_DIR$/block5-command-line-runner/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$USER_HOME$/Desktop/Erick/Ejercicios_Java/Bloque_5/block5-command-line-runner/Block5-command-line-runner/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="graalvm-ce-17" project-jdk-type="JavaSDK">
