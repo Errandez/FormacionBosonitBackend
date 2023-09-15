@@ -11,7 +11,7 @@ public class Apartado3_2 implements CommandLineRunner {
     private String myURL2;
     @Override
     public void run(String... args) throws Exception {
-        String myURL = System.getenv("MYURL");
+        String myURL = System.getenv("MYURL2");
 
         if(myURL!=null){
             myURL2 = myURL;
