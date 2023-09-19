@@ -12,6 +12,14 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/block5-profiles" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/block5-profiles" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/block5-properties" />
         <option name="modules">
           <set>

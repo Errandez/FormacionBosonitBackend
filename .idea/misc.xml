@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/block5-logging" />
+    <file type="web" url="file://$PROJECT_DIR$/block5-profiles" />
     <file type="web" url="file://$PROJECT_DIR$/block5-properties" />
   </component>
   <component name="MavenProjectsManager">
@@ -16,11 +17,17 @@
         <option value="$PROJECT_DIR$/block5-command-line-runner/pom.xml" />
         <option value="$PROJECT_DIR$/bloque5-properties/pom.xml" />
         <option value="$PROJECT_DIR$/bloque5-logging/pom.xml" />
+        <option value="$PROJECT_DIR$/block5-profiles/pom.xml" />
+        <option value="$PROJECT_DIR$/block5-logging1/pom.xml" />
+        <option value="$PROJECT_DIR$/block5-profiles1/pom.xml" />
+        <option value="$PROJECT_DIR$/block6-simple-controllers/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$USER_HOME$/Desktop/Erick/Ejercicios_Java/Bloque_5/block5-command-line-runner/Block5-command-line-runner/pom.xml" />
+        <option value="$PROJECT_DIR$/block5-profiles/pom.xml" />
+        <option value="$PROJECT_DIR$/bloque5-logging/pom.xml" />
       </set>
     </option>
   </component>
