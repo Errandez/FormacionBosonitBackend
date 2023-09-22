@@ -15,6 +15,7 @@
         <module name="block6-person-controllers" />
         <module name="block3-maven-package" />
         <module name="block1-process-file-and-streams" />
+        <module name="block6-path-variable-headers" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -32,6 +33,7 @@
       <module name="block5-logging1" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
       <module name="block5-profiles1" options="-parameters" />
+      <module name="block6-path-variable-headers" options="-parameters" />
       <module name="block6-person-controllers" options="-parameters" />
       <module name="block6-simple-controllers" options="-parameters" />
       <module name="bloque5-logging" options="-parameters" />
