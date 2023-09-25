@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentInputDto {
+public class PersonaOutputDto {
     private int id;
     private String name;
-    private String lastName;
+    private String poblacion;
+    private int edad;
 }
