@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="block5-logging1" />
         <module name="block5-profiles1" />
+        <module name="block7-crud-validation" />
         <module name="bloque5-properties" />
         <module name="block7-crud" />
         <module name="block5-command-line-runner" />
@@ -38,6 +39,7 @@
       <module name="block6-person-controllers" options="-parameters" />
       <module name="block6-simple-controllers" options="-parameters" />
       <module name="block7-crud" options="-parameters" />
+      <module name="block7-crud-validation" options="-parameters" />
       <module name="bloque5-logging" options="-parameters" />
       <module name="bloque5-properties" options="-parameters" />
     </option>
