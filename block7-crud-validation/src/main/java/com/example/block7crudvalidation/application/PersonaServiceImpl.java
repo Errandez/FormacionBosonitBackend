@@ -22,13 +22,8 @@ public class PersonaServiceImpl implements com.example.block7crudvalidation.appl
 
     @Override
     public PersonaOutputDto addPersona(PersonaInputDto persona) throws UnprocessableEntityException, Exception {
-
-
             Persona p = new Persona(persona);
-            if(p!=null) {
-                return PersonaRepository.save(p).PersonaToPersonaOutputDto();
-            }throw new UnprocessableEntityException("");
-
+            return PersonaRepository.save(p).PersonaToPersonaOutputDto();
     }
 
     @Override

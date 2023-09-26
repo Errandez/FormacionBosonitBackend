@@ -28,8 +28,58 @@ public class Controller {
         try {
             ObjectMapper om = new ObjectMapper();
             PersonaInputDto persona = om.readValue(json, PersonaInputDto.class);
-            URI location = URI.create("/persona");
-            return ResponseEntity.created(location).body(personaService.addPersona(persona));
+            boolean error=false;
+            if(persona.getUsuario()==null || persona.getUsuario().isEmpty()){
+                System.out.println("Usuario no puede ser nulo");
+                error = true;
+            }
+
+            if(persona.getUsuario().length()<6 || persona.getUsuario().length()>10){
+                System.out.println("Usuario debe tener entre 6 y 10 caracteres");
+                error = true;
+            }
+
+            if(persona.getPassword()==null || persona.getPassword().isEmpty()){
+                System.out.println("Password no puede ser nulo");
+                error = true;
+            }
+
+            if(persona.getName()==null|| persona.getName().isEmpty()){
+                System.out.println("Name no puede ser nulo");
+                error = true;
+            }
+
+            if(persona.getCompany_email()==null || persona.getCompany_email().isEmpty()){
+                System.out.println("Company_email no puede ser nulo");
+                error = true;
+            }
+
+            if(persona.getPersonal_email()==null || persona.getPersonal_email().isEmpty()){
+                System.out.println("Personal_email no puede ser nulo");
+                error = true;
+            }
+
+            if(persona.getCity()==null || persona.getCity().isEmpty()){
+                System.out.println("City no puede ser nulo");
+                error = true;
+            }
+
+            if(persona.getActive()==null ){
+                System.out.println("Active no puede ser nulo");
+                error = true;
+            }
+
+            if(persona.getCreated_date()==null){
+                System.out.println("Created_date no puede ser nulo");
+                error = true;
+            }
+
+            if(!error) {
+                URI location = URI.create("/persona");
+                return ResponseEntity.created(location).body(personaService.addPersona(persona));
+            }else{
+                return ResponseEntity.unprocessableEntity().build();
+            }
         }catch (Exception ex){
             return ResponseEntity.unprocessableEntity().build();
         }
