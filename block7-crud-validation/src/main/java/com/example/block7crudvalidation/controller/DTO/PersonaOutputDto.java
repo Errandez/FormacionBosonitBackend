@@ -1,5 +1,6 @@
 package com.example.block7crudvalidation.controller.DTO;
 
+import com.example.block7crudvalidation.domain.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,4 +34,6 @@ public class PersonaOutputDto {
     private String imagen_url;
 
     private Date termination_date;
+
+    private Student id_student;
 }

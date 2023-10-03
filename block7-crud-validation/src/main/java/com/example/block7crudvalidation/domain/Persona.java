@@ -4,10 +4,7 @@ package com.example.block7crudvalidation.domain;
 import com.example.block7crudvalidation.application.UnprocessableEntityException;
 import com.example.block7crudvalidation.controller.DTO.PersonaInputDto;
 import com.example.block7crudvalidation.controller.DTO.PersonaOutputDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +33,8 @@ public class Persona {
     private java.sql.Date created_date;
     private String imagen_url;
     private Date termination_date;
+    @OneToOne
+    private Student id_student;
 
     public Persona (String usuario, String password, String name, String surname, String company_email, String personal_email
             , String city, Boolean active, String created_date, String imagen_url, String termination_date) throws Exception {
@@ -172,6 +171,9 @@ public class Persona {
                 java.util.Date d = formato.parse(persona.getTermination_date());
                 this.created_date = new Date(d.getTime());
             }
+            if(persona.getId_student()!=null){
+                this.id_student=persona.getId_student();
+            }
         }catch (UnprocessableEntityException e) {
             System.out.println("Date: " + e.getCustomError().getTimestamp());
             System.out.println("Http: " + e.getCustomError().getHttp());
@@ -181,6 +183,6 @@ public class Persona {
     
     public PersonaOutputDto PersonaToPersonaOutputDto(){
         return new PersonaOutputDto(this.id,this.usuario,this.password,this.name,this.surname,this.company_email,this.personal_email,
-        this.city,this.active,this.created_date,this.imagen_url,this.termination_date);
+        this.city,this.active,this.created_date,this.imagen_url,this.termination_date,this.id_student);
     }
 }

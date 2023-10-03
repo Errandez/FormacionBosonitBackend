@@ -38,7 +38,7 @@ public class Controller2 {
 
                     } else {
                         error = true;
-                        mensajeError = "Usuario debe tener entre 6 y 10 caracteres. ";
+                        mensajeError = "Usuario debe tener entre 6 y 10 caracteres.";
                     }
 
                 } else {
@@ -170,7 +170,7 @@ public class Controller2 {
             String d2 = formato.format(per.getTermination_date());
             PersonaInputDto persona = new PersonaInputDto(per.getId(),per.getUsuario(), per.getPassword(),per.getName(),per.getSurname(),
                     per.getCompany_email(),per.getPersonal_email(),per.getCity(),per.getActive(),d1,per.getImagen_url(),
-                    d2);
+                    d2, per.getId_student());
             ObjectMapper om = new ObjectMapper();
             PersonaInputDto personaaux = om.readValue(json,PersonaInputDto.class);
             if(personaaux!= null){

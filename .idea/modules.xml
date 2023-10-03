@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/FormacionBosonitBackend.iml" filepath="$PROJECT_DIR$/.idea/FormacionBosonitBackend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/block7-crud-validation/block7-crud-validation.iml" filepath="$PROJECT_DIR$/block7-crud-validation/block7-crud-validation.iml" />
     </modules>
   </component>
 </project>

@@ -1,10 +1,13 @@
 package com.example.block7crudvalidation.controller.DTO;
 
+import com.example.block7crudvalidation.domain.Student;
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
@@ -34,4 +37,6 @@ public class PersonaInputDto {
     private String imagen_url;
 
     private String termination_date;
+
+    private Student id_student;
 }

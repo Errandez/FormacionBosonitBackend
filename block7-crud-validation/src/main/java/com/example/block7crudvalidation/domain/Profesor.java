@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Set;
 
@@ -14,8 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Profesor {
     @Id
-    @GeneratedValue
-    @GenericGenerator(name="codigoGenerador", strategy="com.example.block7crudvalidation.domain.CodigoGenerador")
+    @UuidGenerator
     private String id_profesor;
     @OneToOne
     @JoinColumn(name = "Persona",nullable = false,unique = true)
