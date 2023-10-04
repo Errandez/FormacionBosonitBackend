@@ -2,28 +2,37 @@ package com.example.block7crudvalidation.application;
 
 import com.example.block7crudvalidation.controller.DTO.StudentInputDto;
 import com.example.block7crudvalidation.controller.DTO.StudentOutputDto;
+import com.example.block7crudvalidation.domain.Persona;
 import com.example.block7crudvalidation.domain.Student;
-import com.example.block7crudvalidation.repository.StudentRepository;
-import com.example.block7crudvalidation.controller.DTO.StudentInputDto;
-import com.example.block7crudvalidation.controller.DTO.StudentOutputDto;
+
+import com.example.block7crudvalidation.domain.Mappers.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 @Service
 public class StudentServiceImpl implements StudentService{
     @Autowired
     com.example.block7crudvalidation.repository.StudentRepository StudentRepository;
+    @Autowired
+    com.example.block7crudvalidation.repository.PersonaRepository PersonaRepository;
 
     @Override
     public StudentOutputDto addStudent(StudentInputDto student) throws Exception{
-        return StudentRepository.save(new Student(student)).StudentToStudentOutputDto();
+        Persona persona = PersonaRepository.findById(student.getId_persona()).orElseThrow();
+        Student student1 = StudentMapper.instancia.StudentInputDtoToStudent(student);
+        student1.setId_persona(persona);
+
+        return StudentRepository.save(student1).StudentToStudentOutputDto();
+
     }
 
     @Override
-    public StudentOutputDto getStudentById(int id) {
+    public StudentOutputDto getStudentById(String id) {
         return StudentRepository.findById(id).orElseThrow()
                 .StudentToStudentOutputDto();
     }
@@ -43,7 +52,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void deleteStudentById(int id) {
+    public void deleteStudentById(String id) {
         StudentRepository.findById(id).orElseThrow();
         StudentRepository.deleteById(id);
     }
@@ -56,7 +65,7 @@ public class StudentServiceImpl implements StudentService{
     }
     @Override
     public StudentOutputDto updateStudent(StudentInputDto Student) {
-        StudentRepository.findById(Integer.valueOf(Student.getId_student())).orElseThrow();
+        StudentRepository.findById(Student.getId_student()).orElseThrow();
         return StudentRepository.save(new Student(Student))
                 .StudentToStudentOutputDto();
     }

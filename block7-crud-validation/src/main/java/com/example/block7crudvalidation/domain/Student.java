@@ -2,6 +2,7 @@ package com.example.block7crudvalidation.domain;
 
 import com.example.block7crudvalidation.controller.DTO.StudentInputDto;
 import com.example.block7crudvalidation.controller.DTO.StudentOutputDto;
+import com.example.block7crudvalidation.repository.PersonaRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +18,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Student {
     @Id
-    @UuidGenerator
+    @GeneratedValue
+    @GenericGenerator(name="codigoGenerador", strategy="com.example.block7crudvalidation.domain.CodigoGenerador")
     private String id_student;
     @OneToOne
     @JoinColumn(name="id_persona", nullable = false, unique = true)
@@ -33,12 +35,13 @@ public class Student {
     @Column(columnDefinition = "VARCHAR(10) DEFAULT 'FRONT'", nullable = true)
     private branchType branch;
 
-    @ManyToMany(mappedBy = "students")
+    @ManyToMany
     @Column(nullable = true)
     private Set<Asignatura> asignaturas;
 
 
     public Student(StudentInputDto si){
+        /*
         if(si.getId_student()!=null && !si.getId_student().isEmpty()) {
             this.id_persona = si.getId_persona();
         }
@@ -51,6 +54,8 @@ public class Student {
         if(si.getNum_hours_week()!=null) {
             this.num_hours_week = si.getNum_hours_week();
         }
+        */
+
     }
 
     public StudentOutputDto StudentToStudentOutputDto(){

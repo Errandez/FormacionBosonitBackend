@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface StudentService {
     StudentOutputDto addStudent(StudentInputDto Student) throws Exception;
-    StudentOutputDto getStudentById(int id);
+    StudentOutputDto getStudentById(String id);
     List<StudentOutputDto> getStudentByName(String Name);
-    void deleteStudentById(int id);
+    void deleteStudentById(String id);
     List<StudentOutputDto> getAllStudents(int pageNumber, int pageSize);
 
     StudentOutputDto updateStudent (StudentInputDto Student) throws Exception;

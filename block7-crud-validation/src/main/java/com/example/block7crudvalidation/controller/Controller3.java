@@ -30,7 +30,7 @@ public class Controller3 {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentOutputDto> getStudentById(@PathVariable int id){
+    public ResponseEntity<StudentOutputDto> getStudentById(@PathVariable String id){
         try{
             return ResponseEntity.ok().body(StudentService.getStudentById(id));
         }catch(Exception e){
@@ -47,7 +47,7 @@ public class Controller3 {
         }
     }
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<String> deleteStudentById(@PathVariable int id) {
+    public ResponseEntity<String> deleteStudentById(@PathVariable String id) {
         try {
             StudentService.deleteStudentById(id);
             return ResponseEntity.ok().body("Student with id: " + id + " was deleted");
@@ -65,17 +65,15 @@ public class Controller3 {
     }
 
     @PutMapping(value="/{id}")
-    public ResponseEntity<StudentOutputDto> updateStudent(@PathVariable int id,@RequestBody String json) {
+    public ResponseEntity<StudentOutputDto> updateStudent(@PathVariable String id,@RequestBody String json) {
         try {
             ResponseEntity<StudentOutputDto> p = this.getStudentById(id);
             StudentOutputDto per = p.getBody();
-            StudentInputDto Student = new StudentInputDto(per.getId_student(),per.getId_persona(),per.getNum_hours_week(),per.getId_profesor(),per.getBranch(),per.getAsignaturas());
+            StudentInputDto Student = new StudentInputDto(per.getId_student(),per.getId_persona().getId(),per.getNum_hours_week(),per.getId_profesor(),per.getBranch(),per.getAsignaturas());
             ObjectMapper om = new ObjectMapper();
             StudentInputDto Studentaux = om.readValue(json,StudentInputDto.class);
             if(Studentaux!= null){
-                if(Studentaux.getId_persona()!=null){
-                    Student.setId_student(Studentaux.getId_student());
-                }
+
                 if(Studentaux.getNum_hours_week()!=null){
                     Student.setNum_hours_week(Studentaux.getNum_hours_week());
                 }

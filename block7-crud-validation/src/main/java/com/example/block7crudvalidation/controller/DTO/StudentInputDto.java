@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class StudentInputDto {
     private String id_student;
-    private Persona id_persona;
+    private int id_persona;
     private Integer num_hours_week;
     private Profesor id_profesor;
     private branchType branch;

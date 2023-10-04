@@ -16,7 +16,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Asignatura {
     @Id
-    @UuidGenerator
+    @GeneratedValue
+    @GenericGenerator(name="codigoGenerador", strategy="com.example.block7crudvalidation.domain.CodigoGenerador")
     private String id_Asignatura;
 
     @ManyToMany(cascade = {CascadeType.ALL})

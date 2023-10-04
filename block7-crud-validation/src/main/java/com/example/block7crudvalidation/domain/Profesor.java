@@ -15,7 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Profesor {
     @Id
-    @UuidGenerator
+    @GeneratedValue
+    @GenericGenerator(name="codigoGenerador", strategy="com.example.block7crudvalidation.domain.CodigoGenerador")
     private String id_profesor;
     @OneToOne
     @JoinColumn(name = "Persona",nullable = false,unique = true)
