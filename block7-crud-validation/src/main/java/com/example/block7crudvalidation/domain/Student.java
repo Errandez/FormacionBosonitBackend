@@ -19,17 +19,18 @@ import java.util.Set;
 public class Student {
     @Id
     @GeneratedValue
-    @GenericGenerator(name="codigoGenerador", strategy="com.example.block7crudvalidation.domain.CodigoGenerador")
-    private String id_student;
-    @OneToOne
-    @JoinColumn(name="id_persona", nullable = false, unique = true)
-    private Persona id_persona;
+//    @GeneratedValue
+//    @GenericGenerator(name="codigoGenerador", strategy="com.example.block7crudvalidation.domain.CodigoGenerador")
+    private int student;
+    @OneToOne()
+    @JoinColumn(name="persona")
+    private Persona persona;
     @Column(nullable = false)
     private int num_hours_week;
 
     @OneToOne
     @JoinColumn(name="id_profesor",nullable = true, unique = true)
-    private Profesor id_profesor;
+    private Profesor profesor;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(10) DEFAULT 'FRONT'", nullable = true)
@@ -59,8 +60,8 @@ public class Student {
     }
 
     public StudentOutputDto StudentToStudentOutputDto(){
-        return new StudentOutputDto(this.id_student,
-                this.id_persona,this.num_hours_week,this.id_profesor,this.branch,this.asignaturas);
+        return new StudentOutputDto(this.student,
+                this.persona,this.num_hours_week,this.profesor,this.branch,this.asignaturas);
     }
 
 }

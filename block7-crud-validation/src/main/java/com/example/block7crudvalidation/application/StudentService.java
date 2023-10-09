@@ -9,10 +9,12 @@ import java.util.List;
 
 public interface StudentService {
     StudentOutputDto addStudent(StudentInputDto Student) throws Exception;
-    StudentOutputDto getStudentById(String id);
+    StudentOutputDto getStudentById(int id);
     List<StudentOutputDto> getStudentByName(String Name);
-    void deleteStudentById(String id);
+    void deleteStudentById(int id);
     List<StudentOutputDto> getAllStudents(int pageNumber, int pageSize);
+
+    StudentOutputDto addAsignatura(int id,List<Integer> lista);
 
     StudentOutputDto updateStudent (StudentInputDto Student) throws Exception;
 }

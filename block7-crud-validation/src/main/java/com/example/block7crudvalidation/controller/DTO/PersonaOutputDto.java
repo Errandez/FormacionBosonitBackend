@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonaOutputDto {
-    private int id;
+    private int id_persona;
 
     private String usuario;
 
@@ -35,5 +35,5 @@ public class PersonaOutputDto {
 
     private Date termination_date;
 
-    private Student id_student;
+    private StudentOutputDto studentOutputDto;
 }

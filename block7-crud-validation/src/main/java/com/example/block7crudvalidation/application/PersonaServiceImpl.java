@@ -3,6 +3,7 @@ package com.example.block7crudvalidation.application;
 
 import com.example.block7crudvalidation.controller.DTO.PersonaInputDto;
 import com.example.block7crudvalidation.controller.DTO.PersonaOutputDto;
+import com.example.block7crudvalidation.domain.Mappers.PersonaMapper;
 import com.example.block7crudvalidation.domain.Persona;
 import com.example.block7crudvalidation.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class PersonaServiceImpl implements com.example.block7crudvalidation.appl
     @Override
     public PersonaOutputDto addPersona(PersonaInputDto persona) throws UnprocessableEntityException, Exception {
             Persona p = new Persona(persona);
+
             return PersonaRepository.save(p).PersonaToPersonaOutputDto();
     }
 
@@ -61,9 +63,21 @@ public class PersonaServiceImpl implements com.example.block7crudvalidation.appl
 
 
     @Override
-    public PersonaOutputDto updatePersona(PersonaInputDto Persona) throws Exception {
-        PersonaRepository.findById(Persona.getId()).orElseThrow();
-        return PersonaRepository.save(new Persona(Persona))
+    public PersonaOutputDto updatePersona(PersonaInputDto personaInputDto) throws Exception {
+        Persona persona=PersonaRepository.findById(personaInputDto.getId_persona()).orElseThrow();
+        persona.setPersona(personaInputDto.getId_persona());
+        persona.setUsuario(personaInputDto.getUsuario());
+        persona.setName(personaInputDto.getName());
+        persona.setSurname(personaInputDto.getSurname());
+        persona.setCompany_email(personaInputDto.getCompany_email());
+        persona.setPersonal_email(personaInputDto.getPersonal_email());
+        persona.setActive(personaInputDto.getActive());
+        persona.setCity(personaInputDto.getCity());
+        persona.setCreated_date(new java.sql.Date(personaInputDto.getCreated_date().getTime()));
+        persona.setImagen_url(personaInputDto.getImagen_url());
+        persona.setTermination_date(new java.sql.Date(personaInputDto.getTermination_date().getTime()));
+        Persona personaSave=new  Persona(personaInputDto);
+        return PersonaRepository.save(personaSave)
                 .PersonaToPersonaOutputDto();
     }
 }

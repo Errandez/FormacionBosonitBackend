@@ -13,10 +13,9 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentInputDto {
-    private String id_student;
+    private int id_student;
     private int id_persona;
     private Integer num_hours_week;
-    private Profesor id_profesor;
+    private Integer id_profesor;
     private branchType branch;
-    private Set<Asignatura> asignaturas;
 }

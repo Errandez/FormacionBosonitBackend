@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentOutputDto {
-    private String id_student;
+    private int id_student;
     private Persona id_persona;
     private int num_hours_week;
     private Profesor id_profesor;

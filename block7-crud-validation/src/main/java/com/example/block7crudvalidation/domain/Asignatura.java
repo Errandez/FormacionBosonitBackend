@@ -18,7 +18,7 @@ public class Asignatura {
     @Id
     @GeneratedValue
     @GenericGenerator(name="codigoGenerador", strategy="com.example.block7crudvalidation.domain.CodigoGenerador")
-    private String id_Asignatura;
+    private int id_Asignatura;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

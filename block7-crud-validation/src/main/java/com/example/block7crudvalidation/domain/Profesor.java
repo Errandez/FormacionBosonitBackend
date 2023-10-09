@@ -16,11 +16,10 @@ import java.util.Set;
 public class Profesor {
     @Id
     @GeneratedValue
-    @GenericGenerator(name="codigoGenerador", strategy="com.example.block7crudvalidation.domain.CodigoGenerador")
-    private String id_profesor;
+    private int id_profesor;
     @OneToOne
     @JoinColumn(name = "Persona",nullable = false,unique = true)
-    private Persona id_persona;
+    private Persona persona;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(10) DEFAULT 'FRONT'", nullable = false)
     private branchType branch;

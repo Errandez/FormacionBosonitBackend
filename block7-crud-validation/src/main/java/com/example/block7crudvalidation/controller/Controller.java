@@ -3,6 +3,7 @@ package com.example.block7crudvalidation.controller;
 import com.example.block7crudvalidation.application.PersonaServiceImpl;
 import com.example.block7crudvalidation.controller.DTO.PersonaInputDto;
 import com.example.block7crudvalidation.controller.DTO.PersonaOutputDto;
+import com.example.block7crudvalidation.domain.Persona;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,57 +122,16 @@ public class Controller {
     }
 
     @PutMapping(value="/{id}")
-    public ResponseEntity<PersonaOutputDto> updatePersona(@PathVariable int id,@RequestBody String json) {
-        try {
-            ResponseEntity<PersonaOutputDto> p = this.getPersonaById(id);
-            PersonaOutputDto per = p.getBody();
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            String d1 = formato.format(per.getCreated_date());
-            String d2 = formato.format(per.getTermination_date());
-            PersonaInputDto persona = new PersonaInputDto(per.getId(),per.getUsuario(), per.getPassword(),per.getName(),per.getSurname(),
-                per.getCompany_email(),per.getPersonal_email(),per.getCity(),per.getActive(),d1,per.getImagen_url(),
-                d2, per.getId_student());
-            ObjectMapper om = new ObjectMapper();
-            PersonaInputDto personaaux = om.readValue(json,PersonaInputDto.class);
-            if(personaaux!= null){
-                if(personaaux.getUsuario()!=null  && !personaaux.getUsuario().isEmpty()){
-                    persona.setUsuario(personaaux.getUsuario());
-                }
-                if(personaaux.getName()!=null  && !personaaux.getName().isEmpty()){
-                    persona.setName(personaaux.getName());
-                }
-                if(personaaux.getPassword()!=null  && !personaaux.getPassword().isEmpty()){
-                    persona.setPassword(personaaux.getPassword());
-                }
-                if(!personaaux.getSurname().isEmpty()){
-                    persona.setSurname(personaaux.getSurname());
-                }
-                if(personaaux.getCompany_email()!=null  && !personaaux.getCompany_email().isEmpty()){
-                    persona.setCompany_email(personaaux.getCompany_email());
-                }
-                if(personaaux.getPersonal_email()!=null  && !personaaux.getPersonal_email().isEmpty()){
-                    persona.setPersonal_email(personaaux.getPersonal_email());
-                }
-                if(personaaux.getCity()!=null  && !personaaux.getCity().isEmpty()){
-                    persona.setCity(personaaux.getCity());
-                }
-                if(personaaux.getActive()!=null){
-                    persona.setActive(personaaux.getActive());
-                }
-                if(personaaux.getCreated_date()!=null ){
-                    persona.setCreated_date(personaaux.getCreated_date());
-                }
+    public PersonaOutputDto updatePersona(@PathVariable int id,@RequestBody PersonaInputDto personaInputDto) throws Exception{
 
-                persona.setImagen_url(personaaux.getImagen_url());
+//            ResponseEntity<PersonaOutputDto> p = this.getPersonaById(id);
+//            PersonaOutputDto per = p.getBody();
+//            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+//            String d1 = formato.format(per.getCreated_date());
+//            String d2 = formato.format(per.getTermination_date());
+            personaInputDto.setId_persona(id);
+            return personaService.updatePersona(personaInputDto);
+            //return  ResponseEntity.ok().body(personaService.addPersona(personaInputDto));
 
-                persona.setTermination_date(personaaux.getTermination_date());
-
-
-            }
-            personaService.updatePersona(persona);
-            return  ResponseEntity.ok().body(personaService.addPersona(persona));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
     }
 }

@@ -1,9 +1,13 @@
 package com.example.block7crudvalidation.controller;
 
+import com.example.block7crudvalidation.application.StudentService;
 import com.example.block7crudvalidation.application.StudentServiceImpl;
+import com.example.block7crudvalidation.controller.DTO.PersonaOutputDto;
+import com.example.block7crudvalidation.controller.DTO.ProfesorInputDto;
 import com.example.block7crudvalidation.controller.DTO.StudentInputDto;
 import com.example.block7crudvalidation.controller.DTO.StudentOutputDto;
 import com.example.block7crudvalidation.application.StudentServiceImpl;
+import com.example.block7crudvalidation.repository.StudentRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +34,7 @@ public class Controller3 {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentOutputDto> getStudentById(@PathVariable String id){
+    public ResponseEntity<StudentOutputDto> getStudentById(@PathVariable int id){
         try{
             return ResponseEntity.ok().body(StudentService.getStudentById(id));
         }catch(Exception e){
@@ -47,7 +51,7 @@ public class Controller3 {
         }
     }
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<String> deleteStudentById(@PathVariable String id) {
+    public ResponseEntity<String> deleteStudentById(@PathVariable int id) {
         try {
             StudentService.deleteStudentById(id);
             return ResponseEntity.ok().body("Student with id: " + id + " was deleted");
@@ -64,14 +68,24 @@ public class Controller3 {
         return StudentService.getAllStudents(pageNumber, pageSize);
     }
 
+    @GetMapping("/addAsignaturas/{id}")
+    public StudentOutputDto addAsignatura(@PathVariable int id,@RequestBody List<Integer> lista){
+        return StudentService.addAsignatura(id,lista);
+    }
+
+
     @PutMapping(value="/{id}")
-    public ResponseEntity<StudentOutputDto> updateStudent(@PathVariable String id,@RequestBody String json) {
+    public ResponseEntity<StudentOutputDto> updateStudent(@PathVariable int id,@RequestBody StudentInputDto Studentaux) {
         try {
             ResponseEntity<StudentOutputDto> p = this.getStudentById(id);
             StudentOutputDto per = p.getBody();
-            StudentInputDto Student = new StudentInputDto(per.getId_student(),per.getId_persona().getId(),per.getNum_hours_week(),per.getId_profesor(),per.getBranch(),per.getAsignaturas());
-            ObjectMapper om = new ObjectMapper();
-            StudentInputDto Studentaux = om.readValue(json,StudentInputDto.class);
+            StudentInputDto Student = new StudentInputDto(per.getId_student(),
+                    per.getId_persona().getPersona(),
+                    per.getNum_hours_week(),
+                    per.getId_profesor().getId_profesor(),
+                    per.getBranch()
+                    );
+
             if(Studentaux!= null){
 
                 if(Studentaux.getNum_hours_week()!=null){
@@ -83,9 +97,7 @@ public class Controller3 {
                 if(Studentaux.getBranch()!=null){
                     Student.setBranch(Studentaux.getBranch());
                 }
-                if(Studentaux.getAsignaturas()!=null){
-                    Student.setAsignaturas(Studentaux.getAsignaturas());
-                }
+
             }
             StudentService.updateStudent(Student);
             return  ResponseEntity.ok().body(StudentService.addStudent(Student));
