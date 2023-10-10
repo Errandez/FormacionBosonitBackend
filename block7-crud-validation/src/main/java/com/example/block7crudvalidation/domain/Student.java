@@ -1,19 +1,18 @@
 package com.example.block7crudvalidation.domain;
 
-import com.example.block7crudvalidation.controller.DTO.StudentInputDto;
-import com.example.block7crudvalidation.controller.DTO.StudentOutputDto;
-import com.example.block7crudvalidation.repository.PersonaRepository;
+import com.example.block7crudvalidation.application.ProfesorService;
+import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.UuidGenerator;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {
@@ -28,8 +27,9 @@ public class Student {
     @Column(nullable = false)
     private int num_hours_week;
 
-    @OneToOne
+    @ManyToOne()
     @JoinColumn(name="id_profesor",nullable = true, unique = true)
+    @JsonBackReference
     private Profesor profesor;
 
     @Enumerated(EnumType.STRING)
@@ -38,6 +38,7 @@ public class Student {
 
     @ManyToMany
     @Column(nullable = true)
+
     private Set<Asignatura> asignaturas;
 
 
@@ -59,9 +60,6 @@ public class Student {
 
     }
 
-    public StudentOutputDto StudentToStudentOutputDto(){
-        return new StudentOutputDto(this.student,
-                this.persona,this.num_hours_week,this.profesor,this.branch,this.asignaturas);
-    }
+
 
 }

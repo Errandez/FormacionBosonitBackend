@@ -1,8 +1,7 @@
 package com.example.block7crudvalidation.domain.Mappers;
 
 
-import com.example.block7crudvalidation.controller.DTO.StudentInputDto;
-import com.example.block7crudvalidation.domain.Persona;
+import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
 import com.example.block7crudvalidation.domain.Student;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;

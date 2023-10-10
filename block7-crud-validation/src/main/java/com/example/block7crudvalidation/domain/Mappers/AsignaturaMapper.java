@@ -1,7 +1,7 @@
 package com.example.block7crudvalidation.domain.Mappers;
 
-import com.example.block7crudvalidation.controller.DTO.AsignaturaInputDto;
-import com.example.block7crudvalidation.controller.DTO.AsignaturaOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Inputs.AsignaturaInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.AsignaturaOutputDto;
 import com.example.block7crudvalidation.domain.Asignatura;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;

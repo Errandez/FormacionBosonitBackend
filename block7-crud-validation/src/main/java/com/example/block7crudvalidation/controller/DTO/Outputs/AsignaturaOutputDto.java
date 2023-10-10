@@ -1,4 +1,4 @@
-package com.example.block7crudvalidation.controller.DTO;
+package com.example.block7crudvalidation.controller.DTO.Outputs;
 
 import com.example.block7crudvalidation.domain.Student;
 import lombok.AllArgsConstructor;

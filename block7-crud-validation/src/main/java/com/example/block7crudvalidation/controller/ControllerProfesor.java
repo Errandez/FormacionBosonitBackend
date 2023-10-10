@@ -1,12 +1,8 @@
 package com.example.block7crudvalidation.controller;
 
 import com.example.block7crudvalidation.application.ProfesorServiceImpl;
-import com.example.block7crudvalidation.application.ProfesorServiceImpl;
-import com.example.block7crudvalidation.controller.DTO.ProfesorInputDto;
-import com.example.block7crudvalidation.controller.DTO.ProfesorOutputDto;
-import com.example.block7crudvalidation.controller.DTO.ProfesorInputDto;
-import com.example.block7crudvalidation.controller.DTO.ProfesorOutputDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.block7crudvalidation.controller.DTO.Inputs.ProfesorInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.ProfesorOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.example.block7crudvalidation.controller.DTO;
+package com.example.block7crudvalidation.controller.DTO.Inputs;
 
 import com.example.block7crudvalidation.domain.Asignatura;
 import com.example.block7crudvalidation.domain.Persona;
@@ -12,11 +12,10 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentOutputDto {
+public class StudentInputDto {
     private int id_student;
-    private Persona id_persona;
-    private int num_hours_week;
-    private Profesor id_profesor;
+    private int id_persona;
+    private Integer num_hours_week;
+    private Integer id_profesor;
     private branchType branch;
-    private Set<Asignatura> asignaturas;
 }

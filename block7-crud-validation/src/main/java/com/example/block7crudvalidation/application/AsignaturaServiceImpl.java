@@ -1,9 +1,8 @@
 package com.example.block7crudvalidation.application;
 
-import com.example.block7crudvalidation.controller.DTO.AsignaturaInputDto;
-import com.example.block7crudvalidation.controller.DTO.AsignaturaOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Inputs.AsignaturaInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.AsignaturaOutputDto;
 import com.example.block7crudvalidation.domain.Mappers.AsignaturaMapper;
-import com.example.block7crudvalidation.domain.Persona;
 import com.example.block7crudvalidation.domain.Asignatura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

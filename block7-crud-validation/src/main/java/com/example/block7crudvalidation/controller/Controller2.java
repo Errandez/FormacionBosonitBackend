@@ -3,8 +3,8 @@ package com.example.block7crudvalidation.controller;
 import com.example.block7crudvalidation.application.EntityNotFoundException;
 import com.example.block7crudvalidation.application.PersonaServiceImpl;
 import com.example.block7crudvalidation.application.UnprocessableEntityException;
-import com.example.block7crudvalidation.controller.DTO.PersonaInputDto;
-import com.example.block7crudvalidation.controller.DTO.PersonaOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Inputs.PersonaInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.PersonaOutputDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 

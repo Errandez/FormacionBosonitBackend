@@ -1,21 +1,20 @@
 package com.example.block7crudvalidation.application;
 
-import com.example.block7crudvalidation.controller.DTO.StudentInputDto;
-import com.example.block7crudvalidation.controller.DTO.StudentOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Inputs.ProfesorInputDto;
+import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
 import com.example.block7crudvalidation.domain.Asignatura;
+import com.example.block7crudvalidation.domain.Mappers.ProfesorMapper;
 import com.example.block7crudvalidation.domain.Mappers.StudentMapper;
 import com.example.block7crudvalidation.domain.Persona;
 import com.example.block7crudvalidation.domain.Profesor;
 import com.example.block7crudvalidation.domain.Student;
 
-import com.example.block7crudvalidation.repository.AsignaturaRepository;
-import com.example.block7crudvalidation.repository.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,6 +29,10 @@ public class StudentServiceImpl implements StudentService{
     com.example.block7crudvalidation.repository.ProfesorRepository ProfesorRepository;
     @Autowired
     com.example.block7crudvalidation.repository.AsignaturaRepository AsignaturaRepository;
+    @Autowired
+    ProfesorServiceImpl profesorService;
+    @Autowired
+    PersonaServiceImpl personaService;
 
 
     @Override
@@ -41,21 +44,24 @@ public class StudentServiceImpl implements StudentService{
 
         student1.setPersona(persona);
         student1.setProfesor(profesor);
-        return StudentRepository.save(student1).StudentToStudentOutputDto();
+        ProfesorInputDto profesorInputDto = ProfesorMapper.instancia.ProfesorToProfesorInputDto(profesor);
+        profesorInputDto.setId_persona(profesor.getPersona().getPersona());
+        Student student2 = StudentRepository.save(student1);
+        profesorService.addStudentToProfesor(profesorInputDto,student2);
+        return this.StudentToStudentOutputDto(student2);
 
     }
 
     @Override
     public StudentOutputDto getStudentById(int id) {
-        return StudentRepository.findById(id).orElseThrow()
-                .StudentToStudentOutputDto();
+        return this.StudentToStudentOutputDto(StudentRepository.findById(id).orElseThrow());
     }
 
     @Override
     public List<StudentOutputDto> getStudentByName(String Name) {
         List<StudentOutputDto> Students =  StudentRepository.findAll()
                 .stream()
-                .map(Student::StudentToStudentOutputDto).toList();
+                .map(this::StudentToStudentOutputDto).toList();
         List<StudentOutputDto> StudentsFinal = new ArrayList<>();
         for(StudentOutputDto paux:Students){
             if(paux.getId_persona().getName().equalsIgnoreCase(Name)){
@@ -75,7 +81,7 @@ public class StudentServiceImpl implements StudentService{
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         return StudentRepository.findAll(pageRequest).getContent()
                 .stream()
-                .map(Student::StudentToStudentOutputDto).toList();
+                .map(this::StudentToStudentOutputDto).toList();
     }
 
     @Override
@@ -88,13 +94,14 @@ public class StudentServiceImpl implements StudentService{
         }
         s.setAsignaturas(asignaturaSet);
         StudentRepository.save(s);
-        return s.StudentToStudentOutputDto();
+        return this.StudentToStudentOutputDto(s);
     }
 
     @Override
     public StudentOutputDto updateStudent(StudentInputDto Student) {
         StudentRepository.findById(Student.getId_student()).orElseThrow();
-        return StudentRepository.save(new Student(Student))
-                .StudentToStudentOutputDto();
+        return this.StudentToStudentOutputDto(StudentRepository.save(new Student(Student)));
     }
+
+
 }

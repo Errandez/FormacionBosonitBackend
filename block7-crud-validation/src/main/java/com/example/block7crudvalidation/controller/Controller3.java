@@ -1,14 +1,8 @@
 package com.example.block7crudvalidation.controller;
 
-import com.example.block7crudvalidation.application.StudentService;
 import com.example.block7crudvalidation.application.StudentServiceImpl;
-import com.example.block7crudvalidation.controller.DTO.PersonaOutputDto;
-import com.example.block7crudvalidation.controller.DTO.ProfesorInputDto;
-import com.example.block7crudvalidation.controller.DTO.StudentInputDto;
-import com.example.block7crudvalidation.controller.DTO.StudentOutputDto;
-import com.example.block7crudvalidation.application.StudentServiceImpl;
-import com.example.block7crudvalidation.repository.StudentRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -80,7 +74,7 @@ public class Controller3 {
             ResponseEntity<StudentOutputDto> p = this.getStudentById(id);
             StudentOutputDto per = p.getBody();
             StudentInputDto Student = new StudentInputDto(per.getId_student(),
-                    per.getId_persona().getPersona(),
+                    per.getId_persona().getId_persona(),
                     per.getNum_hours_week(),
                     per.getId_profesor().getId_profesor(),
                     per.getBranch()

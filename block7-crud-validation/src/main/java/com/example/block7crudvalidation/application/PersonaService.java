@@ -1,7 +1,7 @@
 package com.example.block7crudvalidation.application;
 
-import com.example.block7crudvalidation.controller.DTO.PersonaInputDto;
-import com.example.block7crudvalidation.controller.DTO.PersonaOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Inputs.PersonaInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.PersonaOutputDto;
 
 import java.util.List;
 

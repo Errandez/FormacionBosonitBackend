@@ -1,8 +1,6 @@
-package com.example.block7crudvalidation.controller.DTO;
+package com.example.block7crudvalidation.controller.DTO.Outputs;
 
 import com.example.block7crudvalidation.domain.Asignatura;
-import com.example.block7crudvalidation.domain.Persona;
-import com.example.block7crudvalidation.domain.Profesor;
 import com.example.block7crudvalidation.domain.branchType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,10 +10,11 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentInputDto {
+public class StudentOutputDto {
     private int id_student;
-    private int id_persona;
-    private Integer num_hours_week;
-    private Integer id_profesor;
+    private PersonaOutputDto id_persona;
+    private int num_hours_week;
+    private ProfesorOutputDto id_profesor;
     private branchType branch;
+    private Set<Asignatura> asignaturas;
 }

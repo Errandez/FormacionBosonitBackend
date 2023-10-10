@@ -1,14 +1,13 @@
 package com.example.block7crudvalidation.controller;
 
 import com.example.block7crudvalidation.application.AsignaturaServiceImpl;
-import com.example.block7crudvalidation.controller.DTO.AsignaturaInputDto;
-import com.example.block7crudvalidation.controller.DTO.AsignaturaOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Inputs.AsignaturaInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.AsignaturaOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/Asignatura")

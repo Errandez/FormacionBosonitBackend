@@ -1,17 +1,20 @@
-package com.example.block7crudvalidation.controller.DTO;
+package com.example.block7crudvalidation.controller.DTO.Inputs;
 
 import com.example.block7crudvalidation.domain.Student;
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonaOutputDto {
-    private int id_persona;
+public class PersonaInputDto {
+    private Integer id_persona;
+
 
     private String usuario;
 
@@ -35,5 +38,5 @@ public class PersonaOutputDto {
 
     private Date termination_date;
 
-    private StudentOutputDto studentOutputDto;
+    private Student id_student;
 }

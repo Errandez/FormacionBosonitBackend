@@ -2,21 +2,18 @@ package com.example.block7crudvalidation.domain;
 
 
 import com.example.block7crudvalidation.application.UnprocessableEntityException;
-import com.example.block7crudvalidation.controller.DTO.PersonaInputDto;
-import com.example.block7crudvalidation.controller.DTO.PersonaOutputDto;
-import com.example.block7crudvalidation.controller.DTO.StudentOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Inputs.PersonaInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.PersonaOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import lombok.*;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Persona {
@@ -179,13 +176,5 @@ public class Persona {
         }
     }
     
-    public PersonaOutputDto PersonaToPersonaOutputDto(){
-        StudentOutputDto studentOutputDto = new StudentOutputDto();
-        studentOutputDto = null;
-        if(this.student!=null){
-            studentOutputDto = this.student.StudentToStudentOutputDto();
-        }
-        return new PersonaOutputDto(this.persona,this.usuario,this.password,this.name,this.surname,this.company_email,this.personal_email,
-        this.city,this.active,this.created_date,this.imagen_url,this.termination_date,studentOutputDto);
-    }
+
 }
