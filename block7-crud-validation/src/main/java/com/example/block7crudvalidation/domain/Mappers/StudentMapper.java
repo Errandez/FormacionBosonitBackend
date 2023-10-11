@@ -2,6 +2,7 @@ package com.example.block7crudvalidation.domain.Mappers;
 
 
 import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
 import com.example.block7crudvalidation.domain.Student;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -19,4 +20,5 @@ public interface StudentMapper {
     void updateStudentFromDto(StudentInputDto studentinput, @MappingTarget Student entidad);
 
 
+    StudentOutputDto StudentToStudentOutputDto(Student student2);
 }

@@ -78,16 +78,26 @@ public class ProfesorServiceImpl implements ProfesorService{
     }
 
     @Override
-    public ProfesorOutputDto addStudentToProfesor(ProfesorInputDto profesorInputDto, Student student){
-        Profesor profesor=ProfesorRepository.findById(profesorInputDto.getId_profesor()).orElseThrow();
-        Set<Student> students = profesor.getStudents();
-        students.add(student);
-        profesor.setStudents(students);
-        ProfesorMapper.instancia.updateProfesorFromDto(profesorInputDto,profesor);
-        profesor.setStudents(students);
-        Profesor p1 = ProfesorRepository.save(profesor);
-        ProfesorRepository.save(profesor);
-        return this.profesorToProfesorOutputDto(p1);
+    public ProfesorOutputDto addStudentToProfesor(Profesor profesorInputDto, Student student) throws UnprocessableEntityException {
+        Profesor profesor= ProfesorRepository.findById(profesorInputDto.getProfesor()).orElseThrow();
+        Persona persona = PersonaRepository.findById(profesorInputDto.getPersona().getPersona()).orElseThrow();
+
+        if(persona.getProfesor()==null && persona.getStudent()==null){
+            Set<Student> students = profesor.getStudents();
+            students.add(student);
+            profesor.setStudents(students);
+            ProfesorInputDto profesorAux = ProfesorMapper.instancia.ProfesorToProfesorInputDto(profesorInputDto);
+            ProfesorMapper.instancia.updateProfesorFromDto(profesorAux,profesor);
+            profesor.setPersona(persona);
+            profesor.setStudents(students);
+            Profesor p1 = ProfesorRepository.save(profesor);
+            ProfesorRepository.save(profesor);
+            return this.profesorToProfesorOutputDto(p1);
+        }else{
+            throw new UnprocessableEntityException("Persona ya asignada.");
+
+        }
+
     }
     public ProfesorOutputDto profesorToProfesorOutputDto(Profesor profesor){
         Set<Integer> students = new HashSet<>();
@@ -96,7 +106,7 @@ public class ProfesorServiceImpl implements ProfesorService{
                 students.add(s.getStudent());
             }
         }
-        ProfesorOutputDto profesorOutputDto = new ProfesorOutputDto(profesor.getId_profesor(), profesor.getPersona(),profesor.getBranch(),students);
+        ProfesorOutputDto profesorOutputDto = new ProfesorOutputDto(profesor.getProfesor(), profesor.getPersona(),profesor.getBranch(),students);
         return profesorOutputDto;
     }
 }

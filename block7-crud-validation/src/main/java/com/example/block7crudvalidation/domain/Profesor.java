@@ -16,7 +16,7 @@ import java.util.Set;
 public class Profesor {
     @Id
     @GeneratedValue
-    private int id_profesor;
+    private int profesor;
     @OneToOne
     @JoinColumn(name = "Persona",nullable = false,unique = true)
     private Persona persona;

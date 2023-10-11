@@ -35,6 +35,10 @@ public class Persona {
     @JoinColumn(name="student")
     private Student student;
 
+    @OneToOne()
+    @JoinColumn(name="profesor")
+    private Profesor profesor;
+
     public Persona (String usuario, String password, String name, String surname, String company_email, String personal_email
             , String city, Boolean active, String created_date, String imagen_url, String termination_date) throws Exception {
         try {
@@ -174,6 +178,16 @@ public class Persona {
             System.out.println("Http: " + e.getCustomError().getHttp());
             System.out.println("Mensaje: " + e.getCustomError().getMensaje());
         }
+    }
+
+    public PersonaOutputDto PersonaToPersonaOutputDto(){
+        return new PersonaOutputDto(
+                this.getPersona(),this.getUsuario(),
+                this.getPassword(),this.getName(),
+                this.getSurname(), this.getCompany_email(),
+                this.getPersonal_email(), this.getCity(),
+                this.getActive(), this.getCreated_date(),
+                this.getImagen_url(), this.getTermination_date());
     }
     
 

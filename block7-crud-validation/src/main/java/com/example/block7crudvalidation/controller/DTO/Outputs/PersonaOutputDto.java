@@ -34,5 +34,5 @@ public class PersonaOutputDto {
 
     private Date termination_date;
 
-    private StudentOutputDto studentOutputDto;
+
 }

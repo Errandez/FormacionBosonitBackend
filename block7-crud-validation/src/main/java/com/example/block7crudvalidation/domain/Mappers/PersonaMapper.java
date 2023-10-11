@@ -23,5 +23,6 @@ public interface PersonaMapper {
 
     PersonaStudentOutputDto personaToProfesor(Persona p);
 
+
 }
 

@@ -7,7 +7,7 @@ import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
 import com.example.block7crudvalidation.domain.Persona;
 import com.example.block7crudvalidation.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-
+/*
 public class PersonaMapperImpl {
 
     StudentMapperImpl studentService;
@@ -24,3 +24,5 @@ public class PersonaMapperImpl {
         return personaOutputDto;
     }
 }
+*/
+

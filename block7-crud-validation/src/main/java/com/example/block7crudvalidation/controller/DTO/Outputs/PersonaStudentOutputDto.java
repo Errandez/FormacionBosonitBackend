@@ -43,10 +43,10 @@ public class PersonaStudentOutputDto {
 
     private int num_hours_week;
 
-    private Profesor id_profesor;
+    private ProfesorOutputDto id_profesor;
 
     private branchType branch;
 
-    private Set<Asignatura> asignaturas;
+    private Set<AsignaturaOutputDto> asignaturas;
 
 }

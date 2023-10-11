@@ -2,12 +2,16 @@ package com.example.block7crudvalidation.domain;
 
 import com.example.block7crudvalidation.application.ProfesorService;
 import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.AsignaturaOutputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
+import com.example.block7crudvalidation.domain.Mappers.AsignaturaMapper;
+import com.example.block7crudvalidation.domain.Mappers.ProfesorMapper;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,7 +32,7 @@ public class Student {
     private int num_hours_week;
 
     @ManyToOne()
-    @JoinColumn(name="id_profesor",nullable = true, unique = true)
+    @JoinColumn(name="id_profesor",nullable = true)
     @JsonBackReference
     private Profesor profesor;
 
@@ -38,7 +42,6 @@ public class Student {
 
     @ManyToMany
     @Column(nullable = true)
-
     private Set<Asignatura> asignaturas;
 
 
@@ -60,6 +63,16 @@ public class Student {
 
     }
 
-
+    public StudentOutputDto StudentToStudentOutputDto(){
+        Set<Asignatura> asignaturas = this.getAsignaturas();
+        Set<AsignaturaOutputDto> asignaturaOutputDtos = new HashSet<>();
+        if(asignaturas!=null) {
+            for (Asignatura a : asignaturas) {
+                asignaturaOutputDtos.add(AsignaturaMapper.instancia.AsignaturaToAsignaturaOutputDto(a));
+            }
+        }
+        return new StudentOutputDto(this.getStudent(),this.getPersona().PersonaToPersonaOutputDto(),
+                this.getNum_hours_week(), ProfesorMapper.instancia.ProfesorToProfesorOutputDto(this.getProfesor()),this.getBranch(),asignaturaOutputDtos);
+    }
 
 }

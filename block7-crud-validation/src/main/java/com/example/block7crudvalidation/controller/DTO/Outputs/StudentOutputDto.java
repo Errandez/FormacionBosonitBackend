@@ -16,5 +16,5 @@ public class StudentOutputDto {
     private int num_hours_week;
     private ProfesorOutputDto id_profesor;
     private branchType branch;
-    private Set<Asignatura> asignaturas;
+    private Set<AsignaturaOutputDto> asignaturas;
 }
