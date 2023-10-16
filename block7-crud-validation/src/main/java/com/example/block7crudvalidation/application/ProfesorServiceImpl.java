@@ -25,9 +25,10 @@ public class ProfesorServiceImpl implements ProfesorService{
     public ProfesorOutputDto addProfesor(ProfesorInputDto profesorInput) throws Exception {
 
         Persona persona = PersonaRepository.findById(profesorInput.getId_persona()).orElseThrow();
-        Profesor p = ProfesorMapper.instancia.ProfesorInputDtoToProfesor(profesorInput);
-        p.setPersona(persona);
-        return this.profesorToProfesorOutputDto(ProfesorRepository.save(p));
+            Profesor p = ProfesorMapper.instancia.ProfesorInputDtoToProfesor(profesorInput);
+            p.setPersona(persona);
+            return this.profesorToProfesorOutputDto(ProfesorRepository.save(p));
+
     }
 
     @Override
@@ -81,13 +82,13 @@ public class ProfesorServiceImpl implements ProfesorService{
     public ProfesorOutputDto addStudentToProfesor(Profesor profesorInputDto, Student student) throws UnprocessableEntityException {
         Profesor profesor= ProfesorRepository.findById(profesorInputDto.getProfesor()).orElseThrow();
         Persona persona = PersonaRepository.findById(profesorInputDto.getPersona().getPersona()).orElseThrow();
-
-        if(persona.getProfesor()==null && persona.getStudent()==null){
+        if(persona.getStudent()==null) {
             Set<Student> students = profesor.getStudents();
             students.add(student);
             profesor.setStudents(students);
             ProfesorInputDto profesorAux = ProfesorMapper.instancia.ProfesorToProfesorInputDto(profesorInputDto);
-            ProfesorMapper.instancia.updateProfesorFromDto(profesorAux,profesor);
+            ProfesorMapper.instancia.updateProfesorFromDto(profesorAux, profesor);
+            persona.setProfesor(profesor);
             profesor.setPersona(persona);
             profesor.setStudents(students);
             Profesor p1 = ProfesorRepository.save(profesor);
@@ -95,9 +96,7 @@ public class ProfesorServiceImpl implements ProfesorService{
             return this.profesorToProfesorOutputDto(p1);
         }else{
             throw new UnprocessableEntityException("Persona ya asignada.");
-
         }
-
     }
     public ProfesorOutputDto profesorToProfesorOutputDto(Profesor profesor){
         Set<Integer> students = new HashSet<>();
