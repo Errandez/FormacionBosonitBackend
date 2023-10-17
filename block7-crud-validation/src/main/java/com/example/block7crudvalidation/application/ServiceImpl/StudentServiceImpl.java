@@ -1,12 +1,13 @@
-package com.example.block7crudvalidation.application;
+package com.example.block7crudvalidation.application.ServiceImpl;
 
+import com.example.block7crudvalidation.application.Service.StudentService;
 import com.example.block7crudvalidation.controller.DTO.Inputs.ProfesorInputDto;
 import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto2;
 import com.example.block7crudvalidation.domain.Asignatura;
 import com.example.block7crudvalidation.domain.Mappers.ProfesorMapper;
 import com.example.block7crudvalidation.domain.Mappers.StudentMapper;
-import com.example.block7crudvalidation.domain.Mappers.StudentMapperImpl;
 import com.example.block7crudvalidation.domain.Persona;
 import com.example.block7crudvalidation.domain.Profesor;
 import com.example.block7crudvalidation.domain.Student;
@@ -21,7 +22,7 @@ import java.util.Set;
 
 
 @Service
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService {
     @Autowired
     com.example.block7crudvalidation.repository.StudentRepository StudentRepository;
     @Autowired
@@ -36,25 +37,22 @@ public class StudentServiceImpl implements StudentService{
     PersonaServiceImpl personaService;
 
 
-
-
     @Override
     public StudentOutputDto addStudent(StudentInputDto student) throws Exception{
 
         Persona persona = PersonaRepository.findById(student.getId_persona()).orElseThrow();
         Profesor profesor = ProfesorRepository.findById(student.getId_profesor()).orElseThrow();
-        Student student1 = StudentMapper.instancia.StudentInputDtoToStudent(student);
+
 
 
         if(persona.getStudent()==null && persona.getProfesor()==null) {
-            student1.setPersona(persona);
-            student1.setProfesor(profesor);
-            ProfesorInputDto profesorInputDto = ProfesorMapper.instancia.ProfesorToProfesorInputDto(profesor);
-            Student student2 = null;
-            profesorInputDto.setId_profesor(profesor.getProfesor());
-            student2 = StudentRepository.save(student1);
-            profesorService.addStudentToProfesor(profesor,student2);
-            return (student2).StudentToStudentOutputDto();
+            StudentMapper studentMapper=StudentMapper.INSTANCE;
+            Student newStudent=studentMapper.studentInputDtoToStudent(student);
+            //persona.setStudent(newStudent);
+            newStudent.setPersona(persona);
+            newStudent.setProfesor(profesor);
+            return StudentRepository.save(newStudent)
+                    .StudentToStudentOutputDto();
         }
         else{
             return null;
@@ -87,11 +85,11 @@ public class StudentServiceImpl implements StudentService{
         StudentRepository.deleteById(id);
     }
     @Override
-    public List<StudentOutputDto> getAllStudents(int pageNumber, int pageSize) {
+    public List<StudentOutputDto2> getAllStudents(int pageNumber, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         return StudentRepository.findAll(pageRequest).getContent()
                 .stream()
-                .map(Student::StudentToStudentOutputDto).toList();
+                .map(Student::studentToStudentOutputDto2).toList();
     }
 
     @Override

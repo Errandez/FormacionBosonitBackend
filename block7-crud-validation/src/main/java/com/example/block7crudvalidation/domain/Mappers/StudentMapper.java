@@ -2,7 +2,6 @@ package com.example.block7crudvalidation.domain.Mappers;
 
 
 import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
-import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
 import com.example.block7crudvalidation.domain.Student;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -12,13 +11,11 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface StudentMapper {
-    StudentMapper instancia = Mappers.getMapper(StudentMapper.class);
+    StudentMapper INSTANCE= Mappers.getMapper(StudentMapper.class);
 
-    Student StudentInputDtoToStudent(StudentInputDto student);
+    Student studentInputDtoToStudent(StudentInputDto student);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateStudentFromDto(StudentInputDto studentinput, @MappingTarget Student entidad);
+    void updateStudentFromDto(StudentInputDto dto, @MappingTarget Student entity);
 
-
-    StudentOutputDto StudentToStudentOutputDto(Student student2);
 }

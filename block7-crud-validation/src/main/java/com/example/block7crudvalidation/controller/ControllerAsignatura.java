@@ -1,6 +1,6 @@
 package com.example.block7crudvalidation.controller;
 
-import com.example.block7crudvalidation.application.AsignaturaServiceImpl;
+import com.example.block7crudvalidation.application.ServiceImpl.AsignaturaServiceImpl;
 import com.example.block7crudvalidation.controller.DTO.Inputs.AsignaturaInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.AsignaturaOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.block7crudvalidation.application;
+package com.example.block7crudvalidation.application.Service;
 
 import com.example.block7crudvalidation.controller.DTO.Inputs.PersonaInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.PersonaOutputDto;

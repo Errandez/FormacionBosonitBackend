@@ -1,5 +1,6 @@
 package com.example.block7crudvalidation.domain;
 
+import com.example.block7crudvalidation.controller.DTO.Outputs.AsignaturaOutputDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -30,4 +31,11 @@ public class Asignatura {
     @Column(nullable = false)
     private Date initial_date;
     private Date finish_date;
+    public AsignaturaOutputDto AsignaturaToAsignaturaOutputDto(){
+        return new AsignaturaOutputDto(
+                this.id_Asignatura,
+                this.initial_date,
+                this.finish_date
+        );
+    }
 }

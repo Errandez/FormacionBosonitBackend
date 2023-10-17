@@ -1,11 +1,11 @@
-package com.example.block7crudvalidation.application;
+package com.example.block7crudvalidation.application.ServiceImpl;
 
 
+import com.example.block7crudvalidation.application.Service.PersonaService;
+import com.example.block7crudvalidation.application.UnprocessableEntityException;
 import com.example.block7crudvalidation.controller.DTO.Inputs.PersonaInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.PersonaOutputDto;
-import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
 import com.example.block7crudvalidation.domain.Mappers.PersonaMapper;
-import com.example.block7crudvalidation.domain.Mappers.PersonaMapperImpl;
 import com.example.block7crudvalidation.domain.Persona;
 import com.example.block7crudvalidation.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PersonaServiceImpl implements com.example.block7crudvalidation.application.PersonaService{
+public class PersonaServiceImpl implements PersonaService {
 
     @Autowired
     PersonaRepository PersonaRepository;
@@ -27,19 +27,19 @@ public class PersonaServiceImpl implements com.example.block7crudvalidation.appl
     public PersonaOutputDto addPersona(PersonaInputDto persona) throws UnprocessableEntityException, Exception {
             Persona p = new Persona(persona);
 
-            return (PersonaRepository.save(p)).PersonaToPersonaOutputDto();
+            return (PersonaRepository.save(p)).personToPersonOutputDto();
     }
 
     @Override
     public PersonaOutputDto getPersonaById(int id) {
-        return (PersonaRepository.findById(id).orElseThrow()).PersonaToPersonaOutputDto();
+        return (PersonaRepository.findById(id).orElseThrow()).personToPersonOutputDto();
     }
 
     @Override
     public List<PersonaOutputDto> getPersonaByName(String Name) {
         List<PersonaOutputDto> personas =  PersonaRepository.findAll()
                 .stream()
-                .map(Persona::PersonaToPersonaOutputDto).toList();
+                .map(Persona::personToPersonOutputDto).toList();
         List<PersonaOutputDto> personasFinal = new ArrayList<>();
         for(PersonaOutputDto paux:personas){
             if(paux.getName().equalsIgnoreCase(Name)){
@@ -59,7 +59,7 @@ public class PersonaServiceImpl implements com.example.block7crudvalidation.appl
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         return PersonaRepository.findAll(pageRequest).getContent()
                 .stream()
-                .map(Persona::PersonaToPersonaOutputDto).toList();
+                .map(Persona::personToPersonOutputDto).toList();
     }
 
 
@@ -68,7 +68,7 @@ public class PersonaServiceImpl implements com.example.block7crudvalidation.appl
         Persona persona=PersonaRepository.findById(personaInputDto.getId_persona()).orElseThrow();
         PersonaMapper.INSTANCE.updatePersonFromDto(personaInputDto,persona);
 
-        return (persona).PersonaToPersonaOutputDto();
+        return (persona).personToPersonOutputDto();
     }
 
 

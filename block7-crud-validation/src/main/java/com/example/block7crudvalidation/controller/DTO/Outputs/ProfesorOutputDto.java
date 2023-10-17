@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class ProfesorOutputDto {
     private int id_profesor;
-    private Persona persona;
+    private PersonaOutputDto persona;
     private branchType branch;
-    private Set<Integer> id_students;
+    private Set<Student> id_students;
 }

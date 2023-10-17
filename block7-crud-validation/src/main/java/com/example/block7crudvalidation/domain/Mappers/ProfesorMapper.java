@@ -11,13 +11,9 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface ProfesorMapper {
-    ProfesorMapper instancia = Mappers.getMapper(ProfesorMapper.class);
-
-    Profesor ProfesorInputDtoToProfesor(ProfesorInputDto Profesor);
-    ProfesorInputDto ProfesorToProfesorInputDto(Profesor profesor);
-
-    ProfesorOutputDto ProfesorToProfesorOutputDto(Profesor p);
+    ProfesorMapper INSTANCE= Mappers.getMapper(ProfesorMapper.class);
+    Profesor profesorInputDtoToProfesor(ProfesorInputDto profesorInputDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateProfesorFromDto(ProfesorInputDto Profesorinput, @MappingTarget Profesor entidad);
+    void updateProfesorFromDto(ProfesorInputDto dto, @MappingTarget Profesor entity);
 }

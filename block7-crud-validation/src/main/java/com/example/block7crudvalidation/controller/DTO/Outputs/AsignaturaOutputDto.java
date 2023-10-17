@@ -13,7 +13,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class AsignaturaOutputDto {
     private int id_Asignatura;
-    private Set<StudentOutputDto> students;
     private Date initial_date;
     private Date finish_date;
 }

@@ -11,12 +11,9 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface AsignaturaMapper {
-    AsignaturaMapper instancia = Mappers.getMapper(AsignaturaMapper.class);
-
-    Asignatura AsignaturaInputDtoToAsignatura(AsignaturaInputDto Asignatura);
-
-    AsignaturaOutputDto AsignaturaToAsignaturaOutputDto(Asignatura p);
+    AsignaturaMapper INSTANCE=Mappers.getMapper(AsignaturaMapper.class);
+    Asignatura asignaturaInputDtotoAsignatura(AsignaturaInputDto asignaturaInputDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateAsignaturaFromDto(AsignaturaInputDto Asignaturainput, @MappingTarget Asignatura entidad);
+    void updatePatchAsignatura(AsignaturaInputDto dto, @MappingTarget Asignatura entity);
 }

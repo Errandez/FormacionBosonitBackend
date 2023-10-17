@@ -1,6 +1,6 @@
 package com.example.block7crudvalidation.controller;
 
-import com.example.block7crudvalidation.application.ProfesorServiceImpl;
+import com.example.block7crudvalidation.application.ServiceImpl.ProfesorServiceImpl;
 import com.example.block7crudvalidation.controller.DTO.Inputs.ProfesorInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.ProfesorOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;

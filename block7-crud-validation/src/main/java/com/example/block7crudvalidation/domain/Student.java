@@ -1,13 +1,12 @@
 package com.example.block7crudvalidation.domain;
 
-import com.example.block7crudvalidation.application.ProfesorService;
 import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.AsignaturaOutputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto2;
 import com.example.block7crudvalidation.domain.Mappers.AsignaturaMapper;
 import com.example.block7crudvalidation.domain.Mappers.ProfesorMapper;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name="Student")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,7 +32,7 @@ public class Student {
     private int num_hours_week;
 
     @ManyToOne()
-    @JoinColumn(name="id_profesor",nullable = true)
+    @JoinColumn(name="id_profesor",nullable = true, unique = true)
     @JsonBackReference
     private Profesor profesor;
 
@@ -42,6 +42,7 @@ public class Student {
 
     @ManyToMany
     @Column(nullable = true)
+
     private Set<Asignatura> asignaturas;
 
 
@@ -68,11 +69,22 @@ public class Student {
         Set<AsignaturaOutputDto> asignaturaOutputDtos = new HashSet<>();
         if(asignaturas!=null) {
             for (Asignatura a : asignaturas) {
-                asignaturaOutputDtos.add(AsignaturaMapper.instancia.AsignaturaToAsignaturaOutputDto(a));
+                asignaturaOutputDtos.add(a.AsignaturaToAsignaturaOutputDto());
             }
         }
-        return new StudentOutputDto(this.getStudent(),this.getPersona().PersonaToPersonaOutputDto(),
-                this.getNum_hours_week(), ProfesorMapper.instancia.ProfesorToProfesorOutputDto(this.getProfesor()),this.getBranch(),asignaturaOutputDtos);
+        Profesor p = new Profesor();
+        p.ProfesorToProfesorOutputDto();
+        return new StudentOutputDto(this.getStudent(),this.getPersona().personToPersonOutputDto(),
+                this.getNum_hours_week(), this.getProfesor().ProfesorToProfesorOutputDto(),this.getBranch(),asignaturaOutputDtos);
+    }
+
+    public StudentOutputDto2 studentToStudentOutputDto2(){
+        Integer i = this.getStudent();
+        return new StudentOutputDto2(
+                i,
+                this.num_hours_week,
+                this.branch
+        );
     }
 
 }

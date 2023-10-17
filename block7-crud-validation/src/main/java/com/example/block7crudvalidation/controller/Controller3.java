@@ -1,8 +1,9 @@
 package com.example.block7crudvalidation.controller;
 
-import com.example.block7crudvalidation.application.StudentServiceImpl;
+import com.example.block7crudvalidation.application.ServiceImpl.StudentServiceImpl;
 import com.example.block7crudvalidation.controller.DTO.Inputs.StudentInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto;
+import com.example.block7crudvalidation.controller.DTO.Outputs.StudentOutputDto2;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +56,7 @@ public class Controller3 {
         }
     }
     @GetMapping
-    public Iterable<StudentOutputDto> getAllStudents(
+    public Iterable<StudentOutputDto2> getAllStudents(
             @RequestParam(defaultValue = "0", required = false) int pageNumber,
             @RequestParam(defaultValue = "4", required = false) int pageSize) {
 

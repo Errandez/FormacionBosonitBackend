@@ -1,6 +1,6 @@
 package com.example.block7crudvalidation.controller;
 
-import com.example.block7crudvalidation.application.PersonaServiceImpl;
+import com.example.block7crudvalidation.application.ServiceImpl.PersonaServiceImpl;
 import com.example.block7crudvalidation.controller.DTO.Inputs.PersonaInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.PersonaOutputDto;
 import com.fasterxml.jackson.core.JsonProcessingException;

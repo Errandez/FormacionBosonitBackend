@@ -1,5 +1,6 @@
-package com.example.block7crudvalidation.application;
+package com.example.block7crudvalidation.application.ServiceImpl;
 
+import com.example.block7crudvalidation.application.Service.AsignaturaService;
 import com.example.block7crudvalidation.controller.DTO.Inputs.AsignaturaInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.AsignaturaOutputDto;
 import com.example.block7crudvalidation.domain.Mappers.AsignaturaMapper;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AsignaturaServiceImpl implements AsignaturaService{
+public class AsignaturaServiceImpl implements AsignaturaService {
     @Autowired
     com.example.block7crudvalidation.repository.AsignaturaRepository AsignaturaRepository;
     @Autowired
@@ -21,15 +22,14 @@ public class AsignaturaServiceImpl implements AsignaturaService{
     public AsignaturaOutputDto addAsignatura(AsignaturaInputDto AsignaturaInput) throws Exception {
 
 
-        Asignatura p = AsignaturaMapper.instancia.AsignaturaInputDtoToAsignatura(AsignaturaInput);
+        Asignatura p = AsignaturaMapper.INSTANCE.asignaturaInputDtotoAsignatura(AsignaturaInput);
 
-        return AsignaturaMapper.instancia.AsignaturaToAsignaturaOutputDto(AsignaturaRepository.save(p));
+        return (AsignaturaRepository.save(p)).AsignaturaToAsignaturaOutputDto();
     }
 
     @Override
     public AsignaturaOutputDto getAsignaturaById(int id) {
-        return AsignaturaMapper.instancia
-                .AsignaturaToAsignaturaOutputDto(AsignaturaRepository.findById(id).orElseThrow());
+        return (AsignaturaRepository.findById(id).orElseThrow()).AsignaturaToAsignaturaOutputDto();
     }
 
 
@@ -48,7 +48,7 @@ public class AsignaturaServiceImpl implements AsignaturaService{
         List<AsignaturaOutputDto> Asignaturaes = new ArrayList<>();
         List<Asignatura> p1=AsignaturaRepository.findAll();
         for(Asignatura p: p1){
-            Asignaturaes.add(AsignaturaMapper.instancia.AsignaturaToAsignaturaOutputDto(p));
+            Asignaturaes.add((p).AsignaturaToAsignaturaOutputDto());
         }
         return Asignaturaes;
     }
@@ -56,6 +56,6 @@ public class AsignaturaServiceImpl implements AsignaturaService{
     @Override
     public AsignaturaOutputDto updateAsignatura(AsignaturaInputDto Asignatura) throws Exception {
         AsignaturaRepository.findById(Asignatura.getId_Asignatura()).orElseThrow();
-        return AsignaturaMapper.instancia.AsignaturaToAsignaturaOutputDto(AsignaturaRepository.save(AsignaturaMapper.instancia.AsignaturaInputDtoToAsignatura(Asignatura)));
+        return (AsignaturaRepository.save(AsignaturaMapper.INSTANCE.asignaturaInputDtotoAsignatura(Asignatura))).AsignaturaToAsignaturaOutputDto();
     }
 }

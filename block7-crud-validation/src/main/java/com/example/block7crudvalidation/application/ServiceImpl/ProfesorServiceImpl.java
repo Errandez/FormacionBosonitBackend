@@ -1,5 +1,6 @@
-package com.example.block7crudvalidation.application;
+package com.example.block7crudvalidation.application.ServiceImpl;
 
+import com.example.block7crudvalidation.application.Service.ProfesorService;
 import com.example.block7crudvalidation.controller.DTO.Inputs.ProfesorInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.ProfesorOutputDto;
 import com.example.block7crudvalidation.domain.Mappers.ProfesorMapper;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class ProfesorServiceImpl implements ProfesorService{
+public class ProfesorServiceImpl implements ProfesorService {
     @Autowired
     com.example.block7crudvalidation.repository.ProfesorRepository ProfesorRepository;
     @Autowired
@@ -25,10 +26,9 @@ public class ProfesorServiceImpl implements ProfesorService{
     public ProfesorOutputDto addProfesor(ProfesorInputDto profesorInput) throws Exception {
 
         Persona persona = PersonaRepository.findById(profesorInput.getId_persona()).orElseThrow();
-            Profesor p = ProfesorMapper.instancia.ProfesorInputDtoToProfesor(profesorInput);
-            p.setPersona(persona);
-            return this.profesorToProfesorOutputDto(ProfesorRepository.save(p));
-
+        Profesor p = ProfesorMapper.INSTANCE.profesorInputDtoToProfesor(profesorInput);
+        p.setPersona(persona);
+        return this.profesorToProfesorOutputDto(ProfesorRepository.save(p));
     }
 
     @Override
@@ -73,30 +73,22 @@ public class ProfesorServiceImpl implements ProfesorService{
     @Override
     public ProfesorOutputDto updateProfesor(ProfesorInputDto profesorInputDto) throws Exception {
         Profesor profesor=ProfesorRepository.findById(profesorInputDto.getId_profesor()).orElseThrow();
-        ProfesorMapper.instancia.updateProfesorFromDto(profesorInputDto,profesor);
+        ProfesorMapper.INSTANCE.updateProfesorFromDto(profesorInputDto,profesor);
         Profesor p1 = ProfesorRepository.save(profesor);
         return this.profesorToProfesorOutputDto(p1);
     }
 
     @Override
-    public ProfesorOutputDto addStudentToProfesor(Profesor profesorInputDto, Student student) throws UnprocessableEntityException {
-        Profesor profesor= ProfesorRepository.findById(profesorInputDto.getProfesor()).orElseThrow();
-        Persona persona = PersonaRepository.findById(profesorInputDto.getPersona().getPersona()).orElseThrow();
-        if(persona.getStudent()==null) {
-            Set<Student> students = profesor.getStudents();
-            students.add(student);
-            profesor.setStudents(students);
-            ProfesorInputDto profesorAux = ProfesorMapper.instancia.ProfesorToProfesorInputDto(profesorInputDto);
-            ProfesorMapper.instancia.updateProfesorFromDto(profesorAux, profesor);
-            persona.setProfesor(profesor);
-            profesor.setPersona(persona);
-            profesor.setStudents(students);
-            Profesor p1 = ProfesorRepository.save(profesor);
-            ProfesorRepository.save(profesor);
-            return this.profesorToProfesorOutputDto(p1);
-        }else{
-            throw new UnprocessableEntityException("Persona ya asignada.");
-        }
+    public ProfesorOutputDto addStudentToProfesor(ProfesorInputDto profesorInputDto, Student student){
+        Profesor profesor=ProfesorRepository.findById(profesorInputDto.getId_profesor()).orElseThrow();
+        Set<Student> students = profesor.getStudents();
+        students.add(student);
+        profesor.setStudents(students);
+        ProfesorMapper.INSTANCE.updateProfesorFromDto(profesorInputDto,profesor);
+        profesor.setStudents(students);
+        Profesor p1 = ProfesorRepository.save(profesor);
+        ProfesorRepository.save(profesor);
+        return this.profesorToProfesorOutputDto(p1);
     }
     public ProfesorOutputDto profesorToProfesorOutputDto(Profesor profesor){
         Set<Integer> students = new HashSet<>();
@@ -105,7 +97,7 @@ public class ProfesorServiceImpl implements ProfesorService{
                 students.add(s.getStudent());
             }
         }
-        ProfesorOutputDto profesorOutputDto = new ProfesorOutputDto(profesor.getProfesor(), profesor.getPersona(),profesor.getBranch(),students);
+        ProfesorOutputDto profesorOutputDto = new ProfesorOutputDto(profesor.getId_profesor(), profesor.getPersona().personToPersonOutputDto(),profesor.getBranch(),profesor.getStudents());
         return profesorOutputDto;
     }
 }
