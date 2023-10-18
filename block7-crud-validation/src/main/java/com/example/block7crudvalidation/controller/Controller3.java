@@ -19,7 +19,7 @@ public class Controller3 {
     StudentServiceImpl StudentService;
 
     @PostMapping
-    public ResponseEntity<StudentOutputDto> addStudent(@RequestBody String json) throws Exception {
+    public ResponseEntity<StudentOutputDto2> addStudent(@RequestBody String json) throws Exception {
         ObjectMapper om = new ObjectMapper();
         StudentInputDto Student = om.readValue(json,StudentInputDto.class);
         System.out.println(Student.getId_student());
@@ -70,7 +70,7 @@ public class Controller3 {
 
 
     @PutMapping(value="/{id}")
-    public ResponseEntity<StudentOutputDto> updateStudent(@PathVariable int id,@RequestBody StudentInputDto Studentaux) {
+    public ResponseEntity<StudentOutputDto2> updateStudent(@PathVariable int id,@RequestBody StudentInputDto Studentaux) {
         try {
             ResponseEntity<StudentOutputDto> p = this.getStudentById(id);
             StudentOutputDto per = p.getBody();

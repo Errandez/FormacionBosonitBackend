@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 
@@ -38,24 +39,24 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public StudentOutputDto addStudent(StudentInputDto student) throws Exception{
+    public StudentOutputDto2 addStudent(StudentInputDto student) throws Exception{
 
         Persona persona = PersonaRepository.findById(student.getId_persona()).orElseThrow();
         Profesor profesor = ProfesorRepository.findById(student.getId_profesor()).orElseThrow();
 
 
 
-        if(persona.getStudent()==null && persona.getProfesor()==null) {
+        if((persona.getStudent()==null ) && persona.getProfesor()==null) {
             StudentMapper studentMapper=StudentMapper.INSTANCE;
             Student newStudent=studentMapper.studentInputDtoToStudent(student);
             //persona.setStudent(newStudent);
             newStudent.setPersona(persona);
             newStudent.setProfesor(profesor);
             return StudentRepository.save(newStudent)
-                    .StudentToStudentOutputDto();
+                    .studentToStudentOutputDto2();
         }
         else{
-            return null;
+            throw new NoSuchElementException("Persona ya asignada.");
         }
 
     }

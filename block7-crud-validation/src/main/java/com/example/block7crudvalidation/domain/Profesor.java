@@ -8,7 +8,9 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="Profesor")
@@ -28,7 +30,7 @@ public class Profesor {
     private branchType branch;
     @OneToMany(mappedBy = "profesor", cascade = CascadeType.REMOVE, orphanRemoval = true)
 
-    private Set<Student> Students;
+    private Set<Student> Students=new HashSet<>();
     public ProfesorOutputDto ProfesorToProfesorOutputDto(){
         PersonaOutputDto persona = null;
         if(this.getPersona()!=null){
@@ -36,6 +38,6 @@ public class Profesor {
         }
         return new ProfesorOutputDto(this.getId_profesor(),
                 persona,
-                this.getBranch(),this.getStudents());
+                this.getBranch(),this.getStudents().stream().map(Student::studentToStudentOutputDto2).collect(Collectors.toSet()));
     }
 }

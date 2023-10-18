@@ -26,14 +26,13 @@ public class Student {
 //    @GenericGenerator(name="codigoGenerador", strategy="com.example.block7crudvalidation.domain.CodigoGenerador")
     private int student;
     @OneToOne()
-    @JoinColumn(name="persona")
+    @JoinColumn(name="persona", nullable= false, unique = true)
     private Persona persona;
     @Column(nullable = false)
     private int num_hours_week;
 
     @ManyToOne()
-    @JoinColumn(name="id_profesor",nullable = true, unique = true)
-    @JsonBackReference
+    @JoinColumn(name="id_profesor")
     private Profesor profesor;
 
     @Enumerated(EnumType.STRING)

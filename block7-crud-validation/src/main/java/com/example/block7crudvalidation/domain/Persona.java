@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Persona {
+
     @Id
     @GeneratedValue
     private int persona;
@@ -35,10 +36,10 @@ public class Persona {
     private String imagen_url;
     private Date termination_date;
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="student")
+
     private Student student;
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="profesor")
+
     private Profesor profesor;
 
     public PersonaOutputDto personToPersonOutputDto() {

@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProfesorServiceImpl implements ProfesorService {
@@ -25,10 +23,14 @@ public class ProfesorServiceImpl implements ProfesorService {
     @Override
     public ProfesorOutputDto addProfesor(ProfesorInputDto profesorInput) throws Exception {
 
+
         Persona persona = PersonaRepository.findById(profesorInput.getId_persona()).orElseThrow();
         Profesor p = ProfesorMapper.INSTANCE.profesorInputDtoToProfesor(profesorInput);
+        if (persona.getProfesor() != null && persona.getStudent()!=null)throw new NoSuchElementException("Esta persona ya está asignada.");
+
+
         p.setPersona(persona);
-        return this.profesorToProfesorOutputDto(ProfesorRepository.save(p));
+        return (ProfesorRepository.save(p).ProfesorToProfesorOutputDto());
     }
 
     @Override
@@ -97,7 +99,7 @@ public class ProfesorServiceImpl implements ProfesorService {
                 students.add(s.getStudent());
             }
         }
-        ProfesorOutputDto profesorOutputDto = new ProfesorOutputDto(profesor.getId_profesor(), profesor.getPersona().personToPersonOutputDto(),profesor.getBranch(),profesor.getStudents());
+        ProfesorOutputDto profesorOutputDto = new ProfesorOutputDto(profesor.getId_profesor(), profesor.getPersona().personToPersonOutputDto(),profesor.getBranch(),profesor.getStudents().stream().map(Student::studentToStudentOutputDto2).collect(Collectors.toSet()));
         return profesorOutputDto;
     }
 }

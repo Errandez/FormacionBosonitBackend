@@ -16,5 +16,5 @@ public class ProfesorOutputDto {
     private int id_profesor;
     private PersonaOutputDto persona;
     private branchType branch;
-    private Set<Student> id_students;
+    private Set<StudentOutputDto2> id_students;
 }
