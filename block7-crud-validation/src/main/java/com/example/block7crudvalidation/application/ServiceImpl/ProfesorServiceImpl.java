@@ -85,6 +85,7 @@ public class ProfesorServiceImpl implements ProfesorService {
         Profesor profesor=ProfesorRepository.findById(profesorInputDto.getId_profesor()).orElseThrow();
         Set<Student> students = profesor.getStudents();
         students.add(student);
+
         profesor.setStudents(students);
         ProfesorMapper.INSTANCE.updateProfesorFromDto(profesorInputDto,profesor);
         profesor.setStudents(students);
