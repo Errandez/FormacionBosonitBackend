@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -19,6 +20,7 @@
         <module name="block6-person-controllers" />
         <module name="block1-process-file-and-streams" />
         <module name="block6-path-variable-headers" />
+        <module name="block11-upload-download-files" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -33,6 +35,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="block-10-dockerize-app" options="-parameters" />
+      <module name="block11-upload-download-files" options="-parameters" />
       <module name="block5-command-line-runner" options="-parameters" />
       <module name="block5-logging1" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
