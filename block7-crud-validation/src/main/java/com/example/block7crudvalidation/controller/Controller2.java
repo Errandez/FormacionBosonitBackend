@@ -8,10 +8,13 @@ import com.example.block7crudvalidation.controller.DTO.Outputs.PersonaOutputDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -105,5 +108,51 @@ public class Controller2 {
     public PersonaOutputDto updatePersona(@PathVariable int id,@RequestBody PersonaInputDto personaInputDto) throws Exception {
         personaInputDto.setId_persona(id);
         return personaService.updatePersona(personaInputDto);
+    }
+
+    @GetMapping("/mayorQue")
+    public Iterable<PersonaOutputDto> mayorQue(@RequestParam(required = false) String usuario,
+                                               @RequestParam(required = false) String name,
+                                               @RequestParam(required = false) String surname,
+                                               @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date created_date,
+                                               @RequestParam(required = false) String CondicionFecha,
+                                               @RequestParam(defaultValue = "usuario",required = false) String orden,
+                                               @RequestParam(defaultValue = "asc", required = false) String direccion,
+                                               @RequestParam(defaultValue = "0", required = false) Integer pageNumber,
+                                               @RequestParam(defaultValue = "4", required = false) Integer pageSize){
+        HashMap<String, Object> data = new HashMap<>();
+        if(usuario!=null && !usuario.isEmpty())data.put("usuario",usuario);
+        if(name!=null && !name.isEmpty())data.put("name",name);
+        if(surname!=null && !surname.isEmpty())data.put("surname",surname);
+        if(created_date!=null)data.put("created_date",created_date);
+        if(CondicionFecha!=null && !CondicionFecha.isEmpty())data.put("CondicionFecha",CondicionFecha);
+        if(orden!=null && !orden.isEmpty())data.put("orden",orden);
+        if(direccion!=null && !direccion.isEmpty())data.put("direccion",direccion);
+        if(pageNumber != null) data.put("pageNumber",pageNumber);
+        if(pageSize != null) data.put("pageSize",pageSize);
+        return personaService.mayorQue(data);
+    }
+
+    @GetMapping("/menorQue")
+    public Iterable<PersonaOutputDto> menorQue(@RequestParam(required = false) String usuario,
+                                               @RequestParam(required = false) String name,
+                                               @RequestParam(required = false) String surname,
+                                               @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date created_date,
+                                               @RequestParam(required = false) String CondicionFecha,
+                                               @RequestParam(defaultValue = "usuario",required = false) String orden,
+                                               @RequestParam(defaultValue = "asc", required = false) String direccion,
+                                               @RequestParam(defaultValue = "0", required = false) Integer pageNumber,
+                                               @RequestParam(defaultValue = "4", required = false) Integer pageSize) {
+        HashMap<String, Object> data = new HashMap<>();
+        if (usuario != null && !usuario.isEmpty()) data.put("usuario", usuario);
+        if (name != null && !name.isEmpty()) data.put("name", name);
+        if (surname != null && !surname.isEmpty()) data.put("surname", surname);
+        if (created_date != null) data.put("created_date", created_date);
+        if (CondicionFecha != null && !CondicionFecha.isEmpty()) data.put("CondicionFecha", CondicionFecha);
+        if (orden != null && !orden.isEmpty()) data.put("orden", orden);
+        if (direccion != null && !direccion.isEmpty()) data.put("direccion", direccion);
+        if (pageNumber != null) data.put("pageNumber", pageNumber);
+        if (pageSize != null) data.put("pageSize", pageSize);
+        return personaService.menorQue(data);
     }
 }
