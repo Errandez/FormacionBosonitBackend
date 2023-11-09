@@ -95,23 +95,22 @@ public class PersonaServiceImpl implements PersonaService {
         data.forEach((field,value)->{
             switch(field){
                 case "usuario":
-                    predicados.add(criteriaBuilder.greaterThan(root.get(field),(String)data.get("usuario")));
+                    predicados.add(criteriaBuilder.greaterThan(root.get("usuario"),(String)data.get("usuario")));
                     break;
                 case "name":
-                    predicados.add(criteriaBuilder.greaterThan(root.get(field),(String)data.get("name")));
+                    predicados.add(criteriaBuilder.greaterThan(root.get("name"),(String)data.get("name")));
                     break;
                 case "surname":
-                    predicados.add(criteriaBuilder.greaterThan(root.get(field),(String)data.get("surname")));
+                    predicados.add(criteriaBuilder.greaterThan(root.get("surname"),(String)data.get("surname")));
                     break;
                 case "created_date":
-                    predicados.add(criteriaBuilder.greaterThan(root.get(field),(Date)data.get("created_date")));
+                    predicados.add(criteriaBuilder.greaterThan(root.get("created_date"),(Date)data.get("created_date")));
                     break;
-                default:
-                    throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"No puede clasificarse por " + field + ".");
             }
         });
+        String seleccionado = "";
         if(data.get("orden")!=null){
-            String seleccionado = "";
+
             switch ((String) data.get("orden")) {
                 case "usuario":
                     seleccionado = "usuario";
@@ -119,12 +118,21 @@ public class PersonaServiceImpl implements PersonaService {
                 case "name":
                     seleccionado = "name";
                     break;
+                default:
+                    seleccionado = "usuario";
+                    break;
             }
-            if(!seleccionado.isEmpty()){
-                query.select(root)
-                        .where(predicados.toArray(new Predicate[predicados.size()]))
-                        .orderBy(data.get("direccion").equals("desc")?criteriaBuilder.desc(root.get(seleccionado)) : criteriaBuilder.asc(root.get(seleccionado)));
-            }
+
+        }
+
+        if(!seleccionado.isEmpty()){
+            query.select(root)
+                    .where(predicados.toArray(new Predicate[predicados.size()]))
+                    .orderBy(data.get("direccion").equals("desc")?criteriaBuilder.desc(root.get(seleccionado)) : criteriaBuilder.asc(root.get(seleccionado)));
+        }else{
+            query.select(root)
+                    .where(predicados.toArray(new Predicate[predicados.size()]))
+                    .orderBy(data.get("direccion").equals("desc")?criteriaBuilder.desc(root.get("usuario")) : criteriaBuilder.asc(root.get("usuario")));
         }
         return entityManager
                 .createQuery(query).setFirstResult((pageRequest.getPageNumber() * pageRequest.getPageSize())+1).setMaxResults(pageRequest.getPageSize())
@@ -155,8 +163,6 @@ public class PersonaServiceImpl implements PersonaService {
                 case "created_date":
                     predicados.add(criteriaBuilder.lessThan(root.get(field),(Date)data.get("created_date")));
                     break;
-                default:
-                    throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"No puede clasificarse por " + field + ".");
             }
         });
         if(data.get("orden")!=null){

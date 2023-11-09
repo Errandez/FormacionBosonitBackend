@@ -59,6 +59,19 @@ public class Persona {
         );
     }
 
+
+    public Persona(int id_persona, String usuario, String password, String name, String surname, String company_email, String personal_email, String city, Date created_date) {
+        this.persona = id_persona;
+        this.usuario = usuario;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.company_email = company_email;
+        this.personal_email = personal_email;
+        this.city = city;
+        this.created_date = created_date;
+    }
+
     public PersonaProfesorOutputDto personToPersonProfesorOutputDto() {
         return new PersonaProfesorOutputDto(
                 this.persona,
