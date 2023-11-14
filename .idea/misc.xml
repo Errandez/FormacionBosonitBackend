@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
@@ -26,6 +27,7 @@
         <option value="$PROJECT_DIR$/block7-crud-validation/pom.xml" />
         <option value="$PROJECT_DIR$/block-10-dockerize-app/pom.xml" />
         <option value="$PROJECT_DIR$/block11-upload-download-files/pom.xml" />
+        <option value="$PROJECT_DIR$/block13-mongodb/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

@@ -11,6 +11,7 @@
         <module name="block7-crud-validation" />
         <module name="block7-crud" />
         <module name="block3-create-repo-git" />
+        <module name="block13-mongodb" />
         <module name="block3-maven-package" />
         <module name="block5-profiles1" />
         <module name="block-10-dockerize-app" />
@@ -36,6 +37,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="block-10-dockerize-app" options="-parameters" />
       <module name="block11-upload-download-files" options="-parameters" />
+      <module name="block13-mongodb" options="-parameters" />
       <module name="block5-command-line-runner" options="-parameters" />
       <module name="block5-logging1" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
