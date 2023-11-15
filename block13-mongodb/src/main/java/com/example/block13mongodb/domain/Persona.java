@@ -29,6 +29,8 @@ public class Persona {
         this.edad = personaInputDto.getEdad();
     }
 
+
+
     public PersonaOutputDto PersonaToPersonaOutputDto(){
         return new PersonaOutputDto(this.id,this.name,this.poblacion,this.edad);
     }
