@@ -22,13 +22,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/person")
-
 public class Controller2 {
     @Autowired
     PersonaServiceImpl personaService;
 
     @PostMapping("/addperson")
-    @CrossOrigin(origins = "https://codepen.io")
     public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto personaInputDto) throws JsonProcessingException,Exception {
         try {
             ObjectMapper om = new ObjectMapper();
@@ -44,13 +42,10 @@ public class Controller2 {
             System.out.println("Mensaje: " + e.getCustomError().getMensaje());
             return ResponseEntity.notFound().build();
         }
-
     }
 
 
-
     @GetMapping("/{id}")
-    @CrossOrigin(origins = "https://cdpn.io")
     public ResponseEntity<PersonaOutputDto> getPersonaById(@PathVariable int id){
         try{
             return ResponseEntity.ok().body(personaService.getPersonaById(id));
@@ -65,7 +60,6 @@ public class Controller2 {
     }
 
     @GetMapping("/nombre/{nombre}")
-    @CrossOrigin(origins = "https://cdpn.io")
     public ResponseEntity<List<PersonaOutputDto>> getPersonaByName(@PathVariable String nombre){
         try{
             return ResponseEntity.ok().body(personaService.getPersonaByName(nombre));
@@ -78,8 +72,8 @@ public class Controller2 {
             return ResponseEntity.notFound().build();
         }
     }
+
     @DeleteMapping(value="/{id}")
-    @CrossOrigin(origins = "https://cdpn.io")
     public ResponseEntity<String> deletePersonaById(@PathVariable int id) {
         try {
             personaService.deletePersonaById(id);
@@ -94,8 +88,8 @@ public class Controller2 {
 
         }
     }
+
     @GetMapping
-    @CrossOrigin(origins = "https://cdpn.io")
     public Iterable<PersonaOutputDto> getAllPersonas(
             @RequestParam(defaultValue = "0", required = false) int pageNumber,
             @RequestParam(defaultValue = "4", required = false) int pageSize) {
@@ -104,7 +98,6 @@ public class Controller2 {
     }
 
     @PutMapping(value="/{id}")
-    @CrossOrigin(origins = "https://cdpn.io")
     public PersonaOutputDto updatePersona(@PathVariable int id,@RequestBody PersonaInputDto personaInputDto) throws Exception {
         personaInputDto.setId_persona(id);
         return personaService.updatePersona(personaInputDto);

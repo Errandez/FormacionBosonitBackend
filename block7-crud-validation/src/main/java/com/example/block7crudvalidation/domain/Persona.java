@@ -74,12 +74,7 @@ public class Persona {
 
     public PersonaProfesorOutputDto personToPersonProfesorOutputDto() {
         return new PersonaProfesorOutputDto(
-                this.persona,
-                this.usuario,
-                this.name,
-                this.surname,
-                this.company_email,
-                this.active,
+
                 this.profesor.ProfesorToProfesorOutputDto()
         );
     }
@@ -103,12 +98,7 @@ public class Persona {
 
     public PersonaStudentOutputDto personToPersonaEstudianteOutputDto() {
         return new PersonaStudentOutputDto(
-                this.persona,
-                this.usuario,
-                this.name,
-                this.surname,
-                this.company_email,
-                this.active,
+
                 this.student.StudentToStudentOutputDto()
         );
     }

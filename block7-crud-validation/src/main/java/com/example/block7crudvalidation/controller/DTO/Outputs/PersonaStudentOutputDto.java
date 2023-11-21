@@ -13,14 +13,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PersonaStudentOutputDto {
-
-    private int id_persona;
-    private String usuario;
-    private String name;
-    private String surname;
-    private String company_email;
-    private boolean active;
+public class PersonaStudentOutputDto extends PersonaOutputDto {
     private StudentOutputDto studentOutputDto;
 
 }

@@ -3,7 +3,7 @@ package com.example.block7crudvalidation.application;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+/*
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
     @Override
@@ -14,3 +14,4 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowCredentials(true);  // Permite enviar cookies en las solicitudes.
     }
 }
+*/
