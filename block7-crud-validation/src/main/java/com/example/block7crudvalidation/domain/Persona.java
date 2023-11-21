@@ -24,14 +24,23 @@ public class Persona {
     @Id
     @GeneratedValue
     private int persona;
+    @Column(nullable = false)
     private String usuario;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String surname;
+    @Column(nullable = false)
     private String company_email;
+    @Column(nullable = false)
     private String personal_email;
+    @Column(nullable = false)
     private String city;
+
     private Boolean active;
+    @Column(nullable = false)
     private java.sql.Date created_date;
     private String imagen_url;
     private Date termination_date;

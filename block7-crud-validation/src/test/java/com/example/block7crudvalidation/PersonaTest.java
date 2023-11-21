@@ -20,6 +20,8 @@ import com.example.block7crudvalidation.repository.ProfesorRepository;
 import com.example.block7crudvalidation.repository.StudentRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -31,7 +33,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Date;
 import java.util.NoSuchElementException;
@@ -41,33 +45,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc(addFilters = false)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PersonaTest {
 
     @Autowired
+    private WebApplicationContext webApplicationContext;
+    @Autowired
     private MockMvc mockMvc;
+
+    @Before
+    public void setup()
+    {
+        //Init MockMvc Object and build
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
 
     @Autowired
     private PersonaRepository personaRepository;
 
     @BeforeAll
     public void Starting(){
-        Persona persona = new Persona();
-        Persona persona2 = new Persona();
-        persona.setPersona(1);
-        persona2.setPersona(2);
-        persona.setName("Erick");
-        persona2.setName("Irati");
-        persona.setSurname("Randez");
-        persona2.setSurname("Arritokieta");
-        persona.setUsuario("Randezzz");
-        persona2.setUsuario("Arrotikie");
-        persona.setPassword("Contraseña");
-        persona2.setPassword("Contraseña1");
-        personaRepository.save(persona);
-        personaRepository.save(persona2);
+        PersonaInputDto persona = new PersonaInputDto(1,"erickk","contraseña1","Erick1","Randez1","aaa1","aaa1","Alfaro",false,new Date(System.currentTimeMillis()),"",null);;
+        PersonaInputDto persona2 = new PersonaInputDto(3,"Randezzz","contraseña1","Erick1","Randez1","aaa1","aaa1","Alfaro",false,new Date(System.currentTimeMillis()),"",null);
+        Persona pers = new Persona(persona);
+        Persona pers1 = new Persona(persona2);
+        personaRepository.save(pers);
+        personaRepository.save(pers1);
     }
 
     @Test

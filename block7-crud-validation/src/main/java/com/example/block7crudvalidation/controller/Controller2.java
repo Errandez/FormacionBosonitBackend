@@ -7,6 +7,7 @@ import com.example.block7crudvalidation.controller.DTO.Inputs.PersonaInputDto;
 import com.example.block7crudvalidation.controller.DTO.Outputs.PersonaOutputDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class Controller2 {
     PersonaServiceImpl personaService;
 
     @PostMapping("/addperson")
-    public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto personaInputDto) throws JsonProcessingException,Exception {
+    public ResponseEntity<PersonaOutputDto> addPersona(@Valid @RequestBody PersonaInputDto personaInputDto) throws JsonProcessingException,Exception {
         try {
             ObjectMapper om = new ObjectMapper();
 
